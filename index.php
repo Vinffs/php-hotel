@@ -1,10 +1,49 @@
 <?php
 include __DIR__ . "/partials/header.php";
+
+function tableTitle($word)
+{
+  return strtoupper((str_replace("_", " ", $word)));
+}
+
 ?>
 
-<main></main>
+<main>
+  <table class="table">
+    <thead>
+      <tr>
+        <?php
+        $firstHotel = reset($hotels);
+        foreach ($firstHotel as $key => $value) { ?>
+        <th scope="col">
+          <?php echo tableTitle($key) ?>
+        </th>
+        <?php } ?>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      foreach ($hotels as $hotel) { ?>
+      <tr>
+        <?php
+          foreach ($hotel as $value) { ?>
+        <td>
+          <?php if ($value == 'parking') {
+                echo "Yes";
+              } else if (!$value == 'parking') {
+                echo "No";
+              } else {
+                echo $value;
+              }
+              ?>
+        </td>
+        <?php } ?>
+      </tr>
+      <?php } ?>
+    </tbody>
+  </table>
+</main>
 
-<footer></footer>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

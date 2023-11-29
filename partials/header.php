@@ -1,7 +1,5 @@
 <?php
 include "./Model/db.php";
-
-var_dump($hotels);
 ?>
 
 <!DOCTYPE html>
