@@ -1,17 +1,30 @@
 <?php
 include __DIR__ . "/partials/header.php";
-
 function tableTitle($word)
 {
   return strtoupper((str_replace("_", " ", $word)));
 }
 
+$filteredHotels = $hotels;
+
+function filter($hotel)
+{
+  $parking = $_GET['parking'];
+  return $hotel['parking'] == $parking || $parking === 'all';
+}
+
+if (isset($_GET['parking'])) {
+  $filteredHotels = array_filter($filteredHotels, 'filter');
+}
+
+
+
 ?>
 
-<main>
+<main class="container">
   <table class="table">
     <thead>
-      <tr>
+      <tr class="text-center">
         <?php
         $firstHotel = reset($hotels);
         foreach ($firstHotel as $key => $value) { ?>
@@ -23,11 +36,11 @@ function tableTitle($word)
     </thead>
     <tbody>
       <?php
-      foreach ($hotels as $hotel) { ?>
+      foreach ($filteredHotels as $hotel) { ?>
       <tr>
         <?php
           foreach ($hotel as $value) { ?>
-        <td>
+        <td class="text-center">
           <?php if ($value == 'parking') {
                 echo "Yes";
               } else if (!$value == 'parking') {
